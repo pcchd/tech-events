@@ -1,0 +1,50 @@
+* Tech Events in Chandigarh
+
+A simple app to list information about all tech events that are happening in Chandigarh.
+
+** Design
+
+In it present form, this app is basically a very simple static site generator. Code is structure as explained below:
+
+*** theme
+
+Contains the HTML/CSS theme which is used to render the data
+
+*** data
+
+Contains one or more /.json/ files which contain the data related to the events. This data is rendered to HTML using theme
+
+New data is supposed to be added by third-party scrapers. Scrapers will be run on servers (e.g heroku), which will then change/add data in this repository. CI will then generate the web listing using the theme.
+
+Here's the flow for adding a new event to the list:
+
+- Create or modify a /.json/ file in /data/ directory
+- Create a pull request, or push data to the repository
+- CI will validate the data, and if valid, it will build the data to HTML and push to ~gh-pages~. If data is invalid in case of pushed code, it will revert it back to previous valid state
+
+*** lib
+
+Code which do the actual work lives here. This is basically a static-site generator. Why reinventing the wheel? Because it is easy, and the flexibility this solution offers is worth more than little work it needs.
+
+Basic purpose of code in this directory is to:
+  - Read data from ~data~ dir
+  - Do things with that data
+
+Things to do with the data are defined by plugins.
+
+**** lib/plugins
+
+A *plugin* is simply a Javascript module that satisfy these constraints:
+
+- Exports a function which accept a string and return an Observable (let's call it result$)
+- result$ must emit only once and only with the resulting value
+- If result$ want to convey anything other than resulting value, it must throw an error
+
+Most things (including data validation) is implemented as plugins.
+
+*Load process of plugins*
+
+Every Javascript file in ~lib/plugins~ is considered a plugin, and an attempt will be made to include it in build pipeline unless:
+- The filename starts with an underscore e.g ~_will-not-run-this-plugin.js~
+
+There is no configuration to decide which plugin to load first. The plugins directory itself is the configuration for the load order. All files in plugins directory are sorted by their name, and loaded in that order. It is recommended to name the plugins like ~00-plugin-to-load-first.js~ where first two decimals decide the priority of the plugin.
