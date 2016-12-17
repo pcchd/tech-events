@@ -3,6 +3,7 @@
   "rules": {
     "object-curly-spacing": [2, "never"],
     "space-infix-ops": 0,
-    "max-len": [2, 160]
+    "max-len": [2, 160],
+    "comma-dangle": [2, "never"]
   }
 }

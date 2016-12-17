@@ -11,36 +11,66 @@
 
       <div class="events-list">
         <ul class="events-list__container">
+          {{#events}}
           <li class="events-list__item">
-            <span class=event-date>January 14, 2016</span>
-            <a class="event-title" href="">Web Scraping for fun and profit</a>
+            <span class=event-date>{{date}}</span>
+            <a class="event-title" href="">{{title}}</a>
 
             <div class="event-description">
-              <p>In this talk Bineet will discuss the chronicles of web scraping, and how it can prove useful in events where some web apps/sites don't provide APIs (or limit their APIs too much to be useful). He will also discuss the challenges he and his team face at their scraper heavy startup SpiderOrb. Attendees will get to see the promised land where you can apply any structure of your choice to the chaos of the Internet.</p>
+              {{description}}
             </div>
 
             <div class="event-details">
               <span class="event-details__container">
                 <span class="event-details__label">Starts at: </span>
-                <span class="event-details__value">10:00 am</span>
+
+                {{#startTime}}
+                <span class="event-details__value">{{startTime}}</span>
+                {{/startTime}}
+                {{^startTime}}
+                <span class="event-details__value">N/A</span>
+                {{/startTime}}
+
               </span>
 
               <span class="event-details__container">
-                <span class="event-details__label">Duration: </span>
-                <span class="event-details__value">2 hours</span>
+                <span class="event-details__label">Ends at: </span>
+
+                {{#endTime}}
+                <span class="event-details__value">{{endTime}}</span>
+                {{/endTime}}
+                {{^endTime}}
+                <span class="event-details__value">N/A</span>
+                {{/endTime}}
+
               </span>
 
               <span class="event-details__container">
                 <span class="event-details__label">Location: </span>
-                <span class="event-details__value">Sector 37</span>
+
+                {{#location}}
+                <span class="event-details__value">{{location}}</span>
+                {{/location}}
+                {{^location}}
+                <span class="event-details__value">N/A</span>
+                {{/location}}
+
               </span>
 
               <span class="event-details__container">
-                <span class="event-details__value"><a class="event-details__rsvp" href="">RSVP</a></span>
+                <span class="event-details__value"><a class="event-details__rsvp" href="{{rsvpLink}}">RSVP </a></span>
+
+                {{#rsvpCount}}
+                <span class="event-details__value">{{rsvpCount}}</span>
+                {{/rsvpCount}}
+                {{^rsvpCount}}
+                <span class="event-details__value"></span>
+                {{/rsvpCount}}
+
               </span>
             </div>
           </li>
-
+          {{/events}}
         </ul>
       </div>
     </div>

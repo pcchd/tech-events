@@ -65,3 +65,9 @@ To verify what order the plugins will load in, simply run ~ls -l~ in plugins dir
 *** bin
 
 Contain the executable script which run the static site generator written in ~lib~.
+
+** FAQ
+
+- *Why separate scrapers mess? Why not just keep scrapers with rest of the code?*
+
+  This is a community project. We are a group of programmers. I wanted to allow the freedom to write the scrapers in any technology whatsoever, so anyone who want to fiddle with some code can do so freely. Hope is we'll teach young programmers coding by building scrapers for this app, so they can get to feel the rush of building something *real*, while allowing them all the technological freedom.
