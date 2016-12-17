@@ -10,6 +10,16 @@ In it present form, this app is basically a very simple static site generator. C
 
 Contains the HTML/CSS theme which is used to render the data
 
+*Structure*
+
+- index.html
+
+  For now, only index.html is supported.
+
+- css/
+
+  All the css required by templates must be kept in ~theme/css/~ directory. This directory is copied as it is to the built site.
+
 *** data
 
 Contains one or more /.json/ files which contain the data related to the events. This data is rendered to HTML using ~theme~.
